@@ -1,2 +1,2 @@
 # datapipetest
-datapipetest
+データパイプのテスト用
