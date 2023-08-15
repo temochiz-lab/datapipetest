@@ -4,19 +4,40 @@
     <title>My experiment</title>
     <script src="https://unpkg.com/jspsych@7.3.2"></script>
     <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.2"></script>
     <script src="https://unpkg.com/@jspsych-contrib/plugin-pipe"></script>
     <link href="https://unpkg.com/jspsych@7.3.2/css/jspsych.css" rel="stylesheet" type="text/css" />
   </head>
   <body></body>
   <script>
     const jsPsych = initJsPsych();
-    const subject_id = jsPsych.randomization.randomID(10);
-    const filename = `${subject_id}.csv`;
+
+    // 保存用のファイル名を生成
+    function createfilename(argseed) {
+    // 日付時間秒を文字列で返す	
+        const dt = new Date();
+        var yyyy = dt.getFullYear();
+        var mm = ('00' + (dt.getMonth()+1)).slice(-2);
+        var dd = ('00' + dt.getDate()).slice(-2);
+        var hh = ('00' + dt.getHours()).slice(-2);
+        var mi = ('00' + dt.getMinutes()).slice(-2);
+        var se = ('00' + dt.getSeconds()).slice(-2);
+        var answer = yyyy + mm + dd + "-" + hh + mm + se ;
+        const subject_id = jsPsych.randomization.randomID(10);
+        answer =  argseed + answer + "-" + subject_id +".csv" ;
+    return (answer);
+    }
+    const expname = "datapipeexample-";
+    var filename = createfilename(expname) ;
+
+// 
 
     const hello_trial = {
-        type: jsPsychHtmlKeyboardResponse,
-        stimulus: 'Hello world! number3.'
-    }
+        type: jsPsychSurveyText,
+        questions: [
+        {prompt: 'How old are you?'}
+        ]
+    };
 
     const save_data = {
         type: jsPsychPipe,
@@ -26,6 +47,7 @@
         data_string: ()=>jsPsych.data.get().csv()
     };
     
+//        jsPsych.run([hello_trial]);
         jsPsych.run([hello_trial, save_data]);
   </script>
 </html>
