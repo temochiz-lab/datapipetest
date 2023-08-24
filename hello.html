@@ -12,9 +12,6 @@
   <script>
     const jsPsych = initJsPsych();
 
-    // ランダムな角度を生成
-　　var randomAngle = Math.floor(Math.random() * 361);
-    
     // 保存用のファイル名を生成
     function createfilename(argseed) {
     // 日付時間秒を文字列で返す	
@@ -34,7 +31,8 @@
     var filename = createfilename(expname) ;
 
 // 
-
+    // ランダムな角度を生成
+　　var randomAngle = Math.floor(Math.random() * 361);
     const hello_trial = {
         type: jsPsychSurveyText,
         questions: [
