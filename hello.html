@@ -36,7 +36,7 @@
     const hello_trial = {
         type: jsPsychSurveyText,
         questions: [
-        {prompt: '<div style="transform: rotate(`${randomAngle}`deg);">回転テキスト2</div>'}
+        {prompt: '<div style="transform: rotate(' + ${randomAngle} + 'deg);>回転テキスト3</div>'}
         ],
         data: {
             rotation_angle: randomAngle
