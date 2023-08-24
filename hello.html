@@ -12,6 +12,9 @@
   <script>
     const jsPsych = initJsPsych();
 
+    // ランダムな角度を生成
+　　var randomAngle = Math.floor(Math.random() * 361);
+    
     // 保存用のファイル名を生成
     function createfilename(argseed) {
     // 日付時間秒を文字列で返す	
@@ -35,8 +38,11 @@
     const hello_trial = {
         type: jsPsychSurveyText,
         questions: [
-        {prompt: '<div style="transform: rotate(45deg);">How old are you?</div>'}
-        ]
+        {prompt: 'stimulus: `<div style="transform: rotate(${randomAngle}deg);">回転テキスト</div>`,'}
+        ],
+        data: {
+            rotation_angle: randomAngle
+        }
     };
 
     const save_data = {
